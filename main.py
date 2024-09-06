@@ -1,7 +1,10 @@
-import telebot
 import config
 import time
+import telebot
+import port_mock
+
 from telebot import types
+
 
 bot = telebot.TeleBot(config.TOKEN)
 opened = [0]
