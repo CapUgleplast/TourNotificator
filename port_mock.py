@@ -1,6 +1,6 @@
 import socket
 
-HOST = ''   # Listen on all network interfaces
+HOST = '0.0.0.0'   # Listen on all network interfaces
 PORT = 8080 # Port number to listen on
 
 # Create a socket object
