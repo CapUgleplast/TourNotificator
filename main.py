@@ -1,12 +1,16 @@
-import config
 import time
 import telebot
-import port_mock
+import os
+from dotenv import load_dotenv
 
 from telebot import types
 
+dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
 
-bot = telebot.TeleBot(config.TOKEN)
+BotToken = os.getenv("TOKEN")
+bot = telebot.TeleBot(BotToken)
 opened = [0]
 op = 0
 manager_reply = False
