@@ -1,13 +1,8 @@
-#from asyncio.windows_events import NULL
-import opcode
-import re
 import telebot
 import config
 import time
-
 from telebot import types
-from re import search
- 
+
 bot = telebot.TeleBot(config.TOKEN)
 opened = [0]
 op = 0
