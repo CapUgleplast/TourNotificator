@@ -2,6 +2,9 @@ import time
 import telebot
 import os
 from dotenv import load_dotenv
+import messages.bonuses as bonuses
+import messages.info as info
+import messages.register as register
 
 from telebot import types
 
@@ -136,7 +139,7 @@ def callback_inline(call):
                         opened.append(1)
                     #bot.send_message(call.message.chat.id, f'{opened}'.format(call.message.from_user, bot.get_me()), parse_mode = 'html')
                     markup = types.InlineKeyboardMarkup(row_width=1)
-                    item1 = types.InlineKeyboardButton("Перейти к регистрации ✅", url='http://go.edayandex.pro/j6e')
+                    item1 = types.InlineKeyboardButton("Перейти к регистрации ✅", url=register.LINK)
                     item2 = types.InlineKeyboardButton("Информация и FAQ ❓", callback_data='info')
                     item3 = types.InlineKeyboardButton("<< Назад", callback_data=check_back())
                     markup.add(item1, item2, item3)
@@ -176,7 +179,7 @@ def callback_inline(call):
  
                     markup.add(item1)
                    
-                    bot.edit_message_text(chat_id = call.message.chat.id, text = f'<b>Действующие бонусы 🎁</b>\n\n❗️В данный момент бонус новичка отсутствует'.format(call.message.from_user, bot.get_me()), message_id=call.message.message_id, parse_mode = 'html', reply_markup=markup)
+                    bot.edit_message_text(chat_id = call.message.chat.id, text = f"<b>Действующие бонусы 🎁</b>\n\n" + bonuses.NONE.format(call.message.from_user, bot.get_me()), message_id=call.message.message_id, parse_mode = 'html', reply_markup=markup)
                     
             
             elif call.data == 'conditions':
