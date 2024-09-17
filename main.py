@@ -289,4 +289,8 @@ def callback_inline(call):
         print(repr(e))
 
 # RUN
-bot.polling(none_stop=True)
+while True:
+    try:
+        bot.infinity_polling()
+    except:
+        continue
