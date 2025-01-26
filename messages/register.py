@@ -1,1 +1,0 @@
-LINK = 'https://clck.ru/3DCY2F'
