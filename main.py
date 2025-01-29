@@ -50,7 +50,7 @@ def lalala(message):
 
 
 def check_price():
-    body = '{"departure":"6","destination":["106"],"adults":"2","children":[],"date":{"from":"13.02.2025","till":"15.02.2025"},"nights":{"from":"7","till":"8"},"stars":[1,2,3,4,5],"hotels":["3060","123246","64355","3092","58318","3055"],"resorts":[],"subResorts":[],"mealType":1,"hotelStatus":false,"minCost":0,"maxCost":99999999,"sourceCurrency":"RUB","offerCurrency":"RUB","source":"search_online_page","cid":1,"page":1,"hotels_count":0,"results_count":0,"firstCoastline":false,"debug":0}'
+    body = '{"departure":"6","destination":["106"],"adults":"2","children":[],"date":{"from":"12.02.2025","till":"15.02.2025"},"nights":{"from":"7","till":"8"},"stars":[1,2,3,4,5],"hotels":["3060","123246","64355","3092","58318","3055"],"resorts":[],"subResorts":[],"mealType":1,"hotelStatus":false,"minCost":0,"maxCost":99999999,"sourceCurrency":"RUB","offerCurrency":"RUB","source":"search_online_page","cid":1,"page":1,"hotels_count":0,"results_count":0,"firstCoastline":false,"debug":0}'
     response = requests.post('https://search.bankturov.ru/api/v3/search', data=body)
     response = json.loads(response.text)
     hotels = []
