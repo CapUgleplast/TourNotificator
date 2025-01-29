@@ -16,6 +16,7 @@ if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
 users = []
+thread = None
 
 BotToken = os.getenv("TOKEN")
 bot = telebot.TeleBot(BotToken)
@@ -33,7 +34,7 @@ def welcome(message):
     markup.add(item1)
 
     init_thread_loop()
-    bot.send_message(message.chat.id, f"Вы подписаны на уведомления об изменении стоимости туров на о. Хайнань в отели \n\nSSAW \n\nPALM BEACH".format(message.from_user, bot.get_me()), parse_mode = 'html',  reply_markup=markup)
+    bot.send_message(message.chat.id, f"Вы подписаны на уведомления об изменении стоимости туров на о. Хайнань в отели \n\nSSAW \n\nPALM BEACH \n\nSANYA NEW CITY \n\nJINJANG BAOHANG \n\nARGYLE YALONG".format(message.from_user, bot.get_me()), parse_mode = 'html',  reply_markup=markup)
 
 
 
@@ -49,18 +50,21 @@ def lalala(message):
 
 
 def check_price():
-    body = '{"departure":"6","destination":["106"],"adults":"2","children":[],"date":{"from":"13.02.2025","till":"15.02.2025"},"nights":{"from":"7","till":"14"},"stars":[1,2,3,4,5],"hotels":[],"resorts":[],"subResorts":[],"mealType":1,"hotelStatus":false,"minCost":0,"maxCost":99999999,"sourceCurrency":"RUB","offerCurrency":"RUB","source":"search_online_page","cid":1,"page":1,"hotels_count":0,"results_count":0,"firstCoastline":false,"debug":0}'
+    body = '{"departure":"6","destination":["106"],"adults":"2","children":[],"date":{"from":"13.02.2025","till":"15.02.2025"},"nights":{"from":"7","till":"8"},"stars":[1,2,3,4,5],"hotels":["3060","123246","64355","3092","58318","3055"],"resorts":[],"subResorts":[],"mealType":1,"hotelStatus":false,"minCost":0,"maxCost":99999999,"sourceCurrency":"RUB","offerCurrency":"RUB","source":"search_online_page","cid":1,"page":1,"hotels_count":0,"results_count":0,"firstCoastline":false,"debug":0}'
     response = requests.post('https://search.bankturov.ru/api/v3/search', data=body)
     response = json.loads(response.text)
     hotels = []
+    names = []
     list = response['data']['rows'][:100]
     for obj in list:
-        if 'SSAW' in obj['residenses']['hotel_name'] or 'PALM BEACH' in obj['residenses']['hotel_name']:
+        key = f"{obj['residenses']['hotel_name']}_{obj['date']}"
+        if key not in names:
+            names.append(key)
             hotels.append(obj)
 
     prices = []
     for obj in hotels:
-        val = f"{obj['residenses']['hotel_name']} - {obj['costValues']['RUB']['rounded']}"
+        val = f"{obj['date']}: {obj['residenses']['hotel_name']} - {obj['costValues']['RUB']['rounded']}"
         # val = { "name": obj['residenses']['hotel_name'], "price": obj['costValues']['RUB']['rounded'] }
         prices.append(val)
 
@@ -89,7 +93,10 @@ def timer_loop(interval):
         time.sleep(interval)
 
 def init_thread_loop():
+    global thread
     interval = 14400  # Интервал в секундах
+    if thread is not None:
+        return
     thread = threading.Thread(target=timer_loop, args=(interval,))
     thread.daemon = True  # Поток завершится, если основная программа завершится
     thread.start()
