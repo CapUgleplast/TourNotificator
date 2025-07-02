@@ -34,7 +34,7 @@ def welcome(message):
     markup.add(item1)
 
     init_thread_loop()
-    bot.send_message(message.chat.id, f"Вы подписаны на уведомления об изменении стоимости туров на о. Хайнань в отели \n\nSSAW \n\nPALM BEACH \n\nSANYA NEW CITY \n\nJINJANG BAOHANG \n\nARGYLE YALONG".format(message.from_user, bot.get_me()), parse_mode = 'html',  reply_markup=markup)
+    bot.send_message(message.chat.id, f"Вы подписаны на уведомления об изменении стоимости туров во Вьетнам, Нячанг. \n\nВ отели \n\nSEASING \n\nRIGEL \n\nREGALIA \n\nPANAMA \n\nPRINCE \n\nNALICAS \n\nMIRACLE \n\nMELIA \n\nJOY TRIP \n\nBOTON BLUE".format(message.from_user, bot.get_me()), parse_mode = 'html',  reply_markup=markup)
 
 
 
@@ -50,7 +50,7 @@ def lalala(message):
 
 
 def check_price():
-    body = '{"departure":"6","destination":["106"],"adults":"2","children":[],"date":{"from":"12.02.2025","till":"15.02.2025"},"nights":{"from":"7","till":"8"},"stars":[1,2,3,4,5],"hotels":["3060","123246","64355","3092","58318","3055"],"resorts":[],"subResorts":[],"mealType":1,"hotelStatus":false,"minCost":0,"maxCost":99999999,"sourceCurrency":"RUB","offerCurrency":"RUB","source":"search_online_page","cid":1,"page":1,"hotels_count":0,"results_count":0,"firstCoastline":false,"debug":0}'
+    body = '{"departure":"6","destination":["8"],"adults":"2","children":[],"date":{"from":"25.07.2025","till":"25.07.2025"},"nights":{"from":"9","till":"14"},"stars":[1,2,3,4,5],"hotels":["42085","58480","70031","115068","128750","70033","80605","61591","70984","64060"],"resorts":[],"subResorts":[],"mealType":1,"hotelStatus":false,"minCost":0,"maxCost":99999999,"sourceCurrency":"RUB","offerCurrency":"RUB","source":"search_online_page","cid":1,"page":1,"hotels_count":0,"results_count":0,"firstCoastline":false,"debug":0}'
     response = requests.post('https://search.bankturov.ru/api/v3/search', data=body)
     response = json.loads(response.text)
     hotels = []
